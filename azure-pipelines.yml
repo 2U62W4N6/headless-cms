@@ -1,0 +1,24 @@
+trigger:
+- develop
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '12.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm ci
+  displayName: 'install dependencies'
+
+- script: |
+    npm test
+  displayName: 'execute test'
+
+- script: |
+    npm run build
+  displayName: 'build module'
+
